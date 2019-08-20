@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "bsqhead.h"
 #include <stdlib.h>
 
 int		min_val(int **hash, int i, int j)
