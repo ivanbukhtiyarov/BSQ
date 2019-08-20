@@ -50,9 +50,11 @@ int ft_valid_number(int n, char *adr, int *digit)
 		count = 0;
 		while(buf[0] != '\n' && ft_valid_char(digit, buf[0]))
 		{
+			//printf("%c" ,buf[0]);
 			read(fd, buf, 1);
 			count++;
 		}
+		//printf("\n");
 		i++;
 		if(count != length)
 			return (0);
