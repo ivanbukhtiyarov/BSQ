@@ -24,7 +24,7 @@ int ft_valid_char(int *digit , char c)
 }
 
 //work but 32 lines
-int ft_valid(int n, char *adr, int *digit)
+int ft_valid_number(int n, char *adr, int *digit)
 {
 	int		fd;
 	int		count;
@@ -58,11 +58,4 @@ int ft_valid(int n, char *adr, int *digit)
 	}
 	close (fd);
 	return (1);
-}
-
-int main(int argc, char **argv)
-{
-	int digits[4] = {5, 'o', '.', 'x'};
-	printf("result %i", ft_valid(5, argv[1], digits));
-	return (0);
 }
