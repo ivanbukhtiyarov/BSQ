@@ -16,7 +16,15 @@
 #include <unistd.h>
 #include <stdio.h>
 
-int ft_valid(int n, char *adr)
+int ft_valid_char(int *digit , char c)
+{
+	if (c == digit[1] || c == digit[2])
+		return (1);
+	return (0);
+}
+
+//work but 32 lines
+int ft_valid(int n, char *adr, int *digit)
 {
 	int		fd;
 	int		count;
@@ -26,30 +34,24 @@ int ft_valid(int n, char *adr)
 	
 	length = 0;
 	fd = open(adr, O_RDONLY);
-	while (buf[0] != '\n')
-	{
+	while (buf[0] != '\n')	
 		read(fd, buf, 1);
-	}
-	buf[0] = '0';
-	while(buf[0] != '\n')
+	buf[0] = digit[1];
+	while(buf[0] != '\n' && ft_valid_char(digit, buf[0]))
 	{
 		read(fd, buf, 1);
 		length++;
 	}
-	//printf("%c",buf[0]);
 	i = 0;
-	while (i < n)
+	while (i < n - 1)
 	{
-		buf[0] = '0';
+		buf[0] = digit[1];
 		count = 0;
-		while(buf[0] != '\n')
+		while(buf[0] != '\n' && ft_valid_char(digit, buf[0]))
 		{
 			read(fd, buf, 1);
 			count++;
-			printf("%i",count);
 		}
-		read(fd, buf, 1);
-		printf("\n");
 		i++;
 		if(count != length)
 			return (0);
@@ -60,6 +62,7 @@ int ft_valid(int n, char *adr)
 
 int main(int argc, char **argv)
 {
-	printf("%i", ft_valid(5, argv[1]));
+	int digits[4] = {5, 'o', '.', 'x'};
+	printf("result %i", ft_valid(5, argv[1], digits));
 	return (0);
 }
