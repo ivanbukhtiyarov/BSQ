@@ -6,7 +6,7 @@
 /*   By: lfilius <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 18:32:41 by lfilius           #+#    #+#             */
-/*   Updated: 2019/08/21 19:03:07 by lfilius          ###   ########.fr       */
+/*   Updated: 2019/08/21 19:17:42 by lfilius          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int main(int argc, char** argv)
 	int *solve;
 	int i;
 
+<<<<<<< HEAD
 	i = 1;
 	if (argc == 1)
 	{
@@ -57,4 +58,14 @@ int main(int argc, char** argv)
 		}
 	}
 	return (0);
+=======
+    params = line_process(first_line_cut(argv[1]));
+  //  printf("1 %i 2 %c 3 %c 4 %c \n" , params[0],params[1],params[2],params[3]);
+   printf("%i",ft_valid_number(params[0], argv[1], params));
+    solve = ft_solve(params[0], argv[1], params);
+    // printf("2: %i  0: %i 1: %i \n", solve[2],solve[0], solve[1]);
+    //printf("\n");
+    draw(argv[1], solve, params);
+    return (0);
+>>>>>>> f398a31938e323d99967a965e1ca96efd72dcb91
 }

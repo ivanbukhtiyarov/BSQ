@@ -14,7 +14,7 @@
 # define BSQHEAD_H
 
 int		is_square(int *cord, int i, int j);
-void	draw(char **av, int *cord, int *symb, int file_num);
+void	draw(char *av, int *cord, int *symb);
 void	skip(int *fd);
 int		ft_atoi(char *str);
 int     ft_strlen(char *str);
@@ -29,5 +29,5 @@ int		min_val(int **hash, int i, int j);
 int		*find_max_square(int **hash, int y, int x);
 int		*line_process(char *str);
 int		dif_sym(char x, char y, char z);
-char	*first_line_cut(char **av);
+char	*first_line_cut(char *av);
 #endif

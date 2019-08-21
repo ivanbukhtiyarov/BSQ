@@ -34,7 +34,7 @@ int		is_digits(char *str, int len)
 	return (1);
 }
 
-char	*first_line_cut(char **av)
+char	*first_line_cut(char *av)
 {
 	int		fl;
 	int		ret;
@@ -43,7 +43,7 @@ char	*first_line_cut(char **av)
 
 	i = 0;
 	s = (char*)malloc(sizeof(char) * 15);
-	fl = open(av[1], O_RDONLY);
+	fl = open(av, O_RDONLY);
 	ret = read(fl, s, 14);
 	close(fl);
 	if (s[ft_strlen(s) - 1] != '\n' || ft_atoi(s) < 0 || ret < 5 ||
