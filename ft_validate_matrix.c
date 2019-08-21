@@ -53,7 +53,7 @@ int ft_valid_number(int n, char *adr, int *digit)
 	fd = open(adr, O_RDONLY);
 	length = skip_and_count(&fd, adr, digit);
 	i = 0;
-	while (i < n - 1 || buf[0])
+	while (i < n - 1)
 	{
 		buf[0] = digit[1];
 		count = 0;
@@ -65,9 +65,11 @@ int ft_valid_number(int n, char *adr, int *digit)
 		i++;
 		if(count != length)
 			return (0);
-
 	}
-
+	// if(read(fd,buf,1))
+	// {
+	// 	return (0);
+	// }
 	close (fd);
 	return (length - 1);
 }
