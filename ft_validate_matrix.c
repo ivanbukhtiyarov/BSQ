@@ -54,7 +54,7 @@ int ft_valid_number(int n, char *adr, int *digit)
 			read(fd, buf, 1);
 			count++;
 		}
-		//printf("\n");
+		//ßprintf("\n");
 		i++;
 		if(count != length)
 			return (0);

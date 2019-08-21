@@ -1,39 +1,65 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   firstline.c                                        :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfilius <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/19 19:13:02 by lfilius           #+#    #+#             */
-/*   Updated: 2019/08/19 19:34:04 by lfilius          ###   ########.fr       */
+/*   Created: 2019/08/19 17:42:00 by lfilius           #+#    #+#             */
+/*   Updated: 2019/08/20 18:40:34 by lfilius          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include "bsqhead.h"
 
-char	*first_line_cut(char **av)
+
+
+int		is_digits(char *str, int len )
+{
+	int i;
+
+	i = 0;
+	while (i < len - 4)
+	{
+		if (str[i] < '0' || str[i] > '9')
+		{
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
+char		*first_line_cut(char **av)
 {
 	int		fl;
 	int		ret;
-	char	*str;
+	char	*s;
+	int		i;
 
-	str = (char*)malloc(sizeof(char) * 15);
+	i = 0;
+	s = (char*)malloc(sizeof(char) * 15);
 	fl = open(av[1], O_RDONLY);
-	ret = read(fl, str, 14);
-	if (str[ft_strlen(str) - 1] != '\n' || ft_atoi(str) <= 0)
+	ret = read(fl, s, 14);
+	close (fl);
+	if (s[ft_strlen(s) - 1] != '\n' || ft_atoi(s) < 0 || ret < 5 ||
+			(ret == 5 && s[0] == '0'))
 	{
 		error();
-		close(fl);
 		return (NULL);
 	}
-	close(fl);
-	return (str);
+	if (!is_digits(s, ft_strlen(s)))
+	{
+		error();
+		return (NULL);
+	}
+	return (s);
 }
 
 int		dif_sym(char x, char y, char z)
@@ -41,27 +67,37 @@ int		dif_sym(char x, char y, char z)
 	if (x != y && y != z && z != x)
 		return (1);
 	else
+	{
+		error();
 		return (0);
+	}
 }
 
 int		*line_process(char *str)
 {
-	int	len;
-	int	*val;
-	int	i;
+	int		len;
+	int		*val;
+	int		i;
 
-	i = 0;
-	val = (int *)malloc(sizeof(int) * 4);
-	len = ft_strlen(str);
-	val[0] = ft_atoi(str);
-	val[1] = str[len - 4];
-	val[2] = str[len - 3];
-	val[3] = str[len - 2];
-	if (!dif_sym(str[len - 2], str[len - 3], str[len - 4]))
+	if (str)
 	{
-		error();
-		return (NULL);
+		i = 0;
+		val = (int *)malloc(sizeof(int) * 4);
+		val[0] = 0;
+		len = ft_strlen(str);
+		while (i < len - 4)
+		{
+			val[0] = val[0] * 10 + (str[i] - '0');
+			i++;
+		}
+		val[1] = str[len - 4];
+		val[2] = str[len - 3];
+		val[3] = str[len - 2];
+		if (!dif_sym(str[len - 2], str[len - 3], str[len - 4]))
+			return (NULL);
+		else
+			return (val);
 	}
 	else
-		return (val);
+		return (NULL);
 }

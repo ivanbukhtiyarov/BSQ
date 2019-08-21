@@ -16,6 +16,7 @@
 int		ft_atoi(char *str);
 int     ft_strlen(char *str);
 void	error();
+int		is_digits(char *str, int len );
 int     ft_valid_number(int n, char *adr, int *digit);
 int     ft_valid_char(int *digit , char c);
 int     *ft_solve(int n, char *adr, int *digit);
