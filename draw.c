@@ -37,7 +37,7 @@ void	skip(int *fd)
 void	draw(char **av, int *cord, int *symb, int file_num)
 {
 	int fl;
-	int buf[1];
+	char buf[1];
 	int i;
 	int j;
 
