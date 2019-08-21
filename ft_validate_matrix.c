@@ -25,6 +25,23 @@ int ft_valid_char(int *digit , char c)
 }
 
 //work but 32 lines
+int skip_and_count(int *fd, char *adr, int *digit)
+{
+	char	buf[1];
+	int		length;
+
+	while (buf[0] != '\n')	
+		read(*fd, buf, 1);
+	buf[0] = digit[1];
+	while(buf[0] != '\n' && ft_valid_char(digit, buf[0]))
+	{
+		read(*fd, buf, 1);
+		length++;
+	}
+	buf[0] = digit[1];
+	return (length);
+}
+
 int ft_valid_number(int n, char *adr, int *digit)
 {
 	int		fd;
@@ -33,16 +50,8 @@ int ft_valid_number(int n, char *adr, int *digit)
 	int		length;
 	int		i;
 	
-	length = 0;
 	fd = open(adr, O_RDONLY);
-	while (buf[0] != '\n')	
-		read(fd, buf, 1);
-	buf[0] = digit[1];
-	while(buf[0] != '\n' && ft_valid_char(digit, buf[0]))
-	{
-		read(fd, buf, 1);
-		length++;
-	}
+	length = skip_and_count(&fd, adr, digit);
 	i = 0;
 	while (i < n - 1)
 	{
@@ -50,11 +59,9 @@ int ft_valid_number(int n, char *adr, int *digit)
 		count = 0;
 		while(buf[0] != '\n' && ft_valid_char(digit, buf[0]))
 		{
-			//printf("%c" ,buf[0]);
 			read(fd, buf, 1);
 			count++;
 		}
-		//ßprintf("\n");
 		i++;
 		if(count != length)
 			return (0);
