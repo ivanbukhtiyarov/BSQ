@@ -41,7 +41,6 @@ int skip_and_count(int *fd, char *adr, int *digit)
 	buf[0] = digit[1];
 	return (length);
 }
-
 int ft_valid_number(int n, char *adr, int *digit)
 {
 	int		fd;
@@ -49,27 +48,67 @@ int ft_valid_number(int n, char *adr, int *digit)
 	char	buf[1];
 	int		length;
 	int		i;
-	
+
 	fd = open(adr, O_RDONLY);
 	length = skip_and_count(&fd, adr, digit);
-	i = 0;
-	while (i < n - 1)
+
+	count = 0;
+	printf("len %i\n", length);
+
+	while (read(fd, buf, 1))
 	{
-		buf[0] = digit[1];
-		count = 0;
-		while(buf[0] != '\n' && ft_valid_char(digit, buf[0]))
+		count++;
+			printf("count %i\n", count);
+		if (!ft_valid_char(digit, buf[0]))
 		{
-			read(fd, buf, 1);
-			count++;
+			if (buf[0] == '\n' && count == length)
+				count = 0;
+			else
+				return (0);
 		}
-		i++;
-		if(count != length)
-			return (0);
 	}
-	// if(read(fd,buf,1))
-	// {
-	// 	return (0);
-	// }
 	close (fd);
 	return (length - 1);
 }
+
+// int ft_valid_n(int n, char *adr, int *digit)
+// {
+// 	int		fd;
+// 	int 	ret;
+// 	char 	buf[1];
+// 	int 	count;
+
+// 	fd = open(adr, O_RDONLY);
+// 	count = 0;
+// 	while (buf[0] != '\n')	
+// 		read(fd, buf, 1);
+// 	buf[0] = digit[1];
+// 	while ((ret = read(fd, buf, 1)))
+// 	{
+// 		if (!ft_valid_char(digit, buf[0]))
+// 		{
+// 			if (buf[0] == '\n')
+// 				count++;
+// 			else
+// 				return (0);
+// 		}
+// 	}
+// 	close (fd);
+// 	printf("count %i ",count);	
+// 	printf("n %i ",n);	
+// 	if(count == n)
+// 		return 1;
+// 	else 
+// 		return 0;
+// }
+
+
+
+// int full_validate(int n, char *adr, int *digit)
+// {
+// 	if(ft_valid_n(n, adr, digit) <= 0)
+// 		return (0);
+// 	if(!ft_valid_number(n, adr, digit) <= 0)
+// 		return (0);
+// 	return (1);
+// }
