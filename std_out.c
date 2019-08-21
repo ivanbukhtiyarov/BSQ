@@ -13,7 +13,7 @@
 #include "bsqhead.h"
 #include "includehead.h"
 
-void	read_std_out(char str)
+void	read_std_out(char *str)
 {
 	int ret;
 	int fl;

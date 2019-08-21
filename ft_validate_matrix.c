@@ -17,19 +17,20 @@
 #include <stdio.h>
 #include "bsqhead.h"
 
-int ft_valid_char(int *digit , char c)
-{
-	if (c == digit[1] || c == digit[2])
-		return (1);
-	return (0);
-}
+// int ft_valid_char(int *digit , char c)
+// {
+// 	if (c == digit[1] || c == digit[2])
+// 		return (1);
+// 	return (0);
+// }
 
-//work but 32 lines
+
 int skip_and_count(int *fd, char *adr, int *digit)
 {
 	char	buf[1];
 	int		length;
 
+	buf[0] = 'c';
 	while (buf[0] != '\n')	
 		read(*fd, buf, 1);
 	buf[0] = digit[1];
@@ -38,7 +39,6 @@ int skip_and_count(int *fd, char *adr, int *digit)
 		read(*fd, buf, 1);
 		length++;
 	}
-	buf[0] = digit[1];
 	return (length);
 }
 int ft_valid_number(int n, char *adr, int *digit)
@@ -53,16 +53,22 @@ int ft_valid_number(int n, char *adr, int *digit)
 	length = skip_and_count(&fd, adr, digit);
 
 	count = 0;
-	printf("len %i\n", length);
-
+	// printf("len %i\n", length);
+	// printf("N %i\n", n);
 	while (read(fd, buf, 1))
 	{
 		count++;
-			printf("count %i\n", count);
+		//printf("N %i\n", n);
+		//printf("%c",buf[0]);
 		if (!ft_valid_char(digit, buf[0]))
 		{
-			if (buf[0] == '\n' && count == length)
+
+			if (buf[0] == '\n' && count == length && n >= 2)
+			{
+				// printf("count %i\n", count);
 				count = 0;
+				n = n - 1;
+			}
 			else
 				return (0);
 		}

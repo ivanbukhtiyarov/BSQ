@@ -72,7 +72,7 @@ int    *fill_another(int *fd, int *digit, int ***arr, int len)
     int		j;
 	int		i;
     int     *temp_max;
-    char    buf[i];
+    char    buf[1];
     int     *max;
 
 

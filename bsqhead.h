@@ -13,9 +13,11 @@
 #ifndef BSQHEAD_H
 # define BSQHEAD_H
 
+//int     ft_valid_n(int n, char *adr, int *digit);
+//int     full_validate(int n, char *adr, int *digit);
 int		is_square(int *cord, int i, int j);
 void	draw(char *av, int *cord, int *symb);
-void	skip(int *fd);
+int 	skip(int *fd);
 int		ft_atoi(char *str);
 int     ft_strlen(char *str);
 void    ft_putchar(char c);
@@ -30,4 +32,6 @@ int		*find_max_square(int **hash, int y, int x);
 int		*line_process(char *str);
 int		dif_sym(char x, char y, char z);
 char	*first_line_cut(char *av);
+int     valid1(char *av, int *digit);
+int     valid2(char *av, int *digit, int len, int a);
 #endif
