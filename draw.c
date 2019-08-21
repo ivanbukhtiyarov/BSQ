@@ -34,7 +34,7 @@ void	skip(int *fd)
 		read(*fd, buf, 1);
 }
 
-void	draw(char **av, int *cord, int *symb, int file_num)
+void	draw(char *av, int *cord, int *symb)
 {
 	int fl;
 	char buf[1];
@@ -43,7 +43,7 @@ void	draw(char **av, int *cord, int *symb, int file_num)
 
 	i = 0;
 	j = 0;
-	fl = open(av[1], O_RDONLY);
+	fl = open(av, O_RDONLY);
 	if (fl == -1)
 		error();
 	skip(&fl);
