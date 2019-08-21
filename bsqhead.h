@@ -13,6 +13,9 @@
 #ifndef BSQHEAD_H
 # define BSQHEAD_H
 
+int		is_square(int *cord, int i, int j);
+void	draw(char **av, int *cord, int *symb, int file_num);
+void	skip(int *fd);
 int		ft_atoi(char *str);
 int     ft_strlen(char *str);
 void    ft_putchar(char c);

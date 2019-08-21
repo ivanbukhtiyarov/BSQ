@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   firstline.c                                        :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfilius <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/21 10:53:21 by lfilius           #+#    #+#             */
-/*   Updated: 2019/08/21 10:55:51 by lfilius          ###   ########.fr       */
+/*   Created: 2019/08/19 17:42:00 by lfilius           #+#    #+#             */
+/*   Updated: 2019/08/21 10:44:16 by lfilius          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,15 @@ char	*first_line_cut(char **av)
 	i = 0;
 	s = (char*)malloc(sizeof(char) * 15);
 	fl = open(av[1], O_RDONLY);
+	ret = read(fl, s, 14);
+	close(fl);
+	if (s[ft_strlen(s) - 1] != '\n' || ft_atoi(s) < 0 || ret < 5 ||
+			(ret == 5 && s[0] == '0'))
 	{
 		error();
 		return (NULL);
 	}
-	ret = read(fl, s, 14);
-	close(fl);
-	if (s[ft_strlen(s) - 1] != '\n' || ft_atoi(s) < 0 || ret < 5 ||
-			(ret == 5 && s[0] == '0') || (!is_digits(s, ft_strlen(s))))
+	if (!is_digits(s, ft_strlen(s)))
 	{
 		error();
 		return (NULL);

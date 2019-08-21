@@ -50,15 +50,13 @@ void skip_and_fill(int *fd, char *adr, int *digit, int ***arr)
 	}
 }
 
-
-
 void swap_max_and_str(int **max,int **temp_max , int *i, int ***arr, int len)
 {
     int j;
 
     if ((*max)[2] > (*temp_max)[2])
     {
-        (*temp_max)[0] = *i;
+        (*temp_max)[0] = *i + 1;
         (*temp_max)[1] = (*max)[1];
         (*temp_max)[2] = (*max)[2];
     }
@@ -102,11 +100,7 @@ int    *ft_solve(int n, char *adr, int *digit)
     int     len;
     int     **arr;
     int		fd;
-	// int		*max;
-	// char	buf[1];
-	// int		j;
-	// int		i;
-     int     *temp_max;
+    int     *temp_max;
 
     temp_max = (int*)malloc(sizeof(int) * 4);
     temp_max[2] = 0;
@@ -114,22 +108,6 @@ int    *ft_solve(int n, char *adr, int *digit)
     aloc_mem(len, &arr);
 	fd = open(adr, O_RDONLY);
     skip_and_fill(&fd, adr, digit, &arr);
-	// i = 1;
-    // buf[0] = digit[1];
-	// while (i < n)
-	// {
-	// 	j = 0;
-	// 	while(j < len)
-	// 	{
-	// 		read(fd, buf, 1);
-    //         arr[1][j] = ft_fill_int(digit, buf[0]);
-    //             j++;
-	// 	}
-    //     read(fd, buf, 1);
-    //     max = find_max_square(arr, len, 2);
-    //     swap_max_and_str(&max, &temp_max, &i, &arr, len);
-	// 	i++;
-	// }
     temp_max = fill_another(&fd, digit, &arr, len);
     free_mem(&arr);
 	close (fd);

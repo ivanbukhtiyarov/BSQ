@@ -13,14 +13,14 @@
 #include "includehead.h"
 #include "bsqhead.h"
 
-int		is_square(int *cord, int *symb, int i, int j)
+int		is_square(int *cord, int i, int j)
 {
 	int i_loc;
 	int j_loc;
 
-	i_loc = cord[1] - cord[0] + 1;
-	j_loc = cord[2] - cord[0] + 1;
-	if ((i >= i_loc && i <= cord[1]) && (j >= j_loc && j <= cord[2]))
+	i_loc = cord[0] - cord[2] + 1;
+	j_loc = cord[1] - cord[2] + 1;
+	if ((i >= i_loc && i <= cord[0]) && (j >= j_loc && j <= cord[1]))
 		return (1);
 	else
 		return (0);
@@ -49,7 +49,7 @@ void	draw(char **av, int *cord, int *symb, int file_num)
 	skip(&fl);
 	while (read(fl, buf, 1))
 	{
-		if (!is_square(cord, symb, i, j))
+		if (!is_square(cord, i, j))
 			write(1, &buf[0], 1);
 		else
 			write(1, &symb[3], 1);
